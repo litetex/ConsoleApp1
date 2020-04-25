@@ -14,10 +14,12 @@ jobs:
         dotnet: [ '5.0.100-preview.3.20216.6' ]
     steps:
     - uses: actions/checkout@v2
+    - run: dotnet --version || echo 'No dotnet command found'
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ matrix.dotnet }}
+        dotnet-version: ${{ runner.dotnet }} #Here should be ${{ matrix.dotnet }}
+    - run: dotnet --version || echo 'No dotnet command found'
     - name: Install dependencies
       run: dotnet restore
     - name: Build
